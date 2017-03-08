@@ -2,3 +2,5 @@
 game.lxml
 *.wav
 obj/compoVersionConfig.old
+obj/postcompoVersionConfig.old
+postcompoVersion.lxml

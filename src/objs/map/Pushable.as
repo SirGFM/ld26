@@ -17,6 +17,7 @@ package objs.map {
 		
 		private var sound:FlxSound;
 		
+		static private var __I__:int = 0;
 		public function Pushable() {
 			super();
 			loadGraphic(gfx, true, false, 16, 16);
@@ -25,6 +26,8 @@ package objs.map {
 			centerOffsets();
 			
 			acceleration.y = gravity;
+			
+			FlxG.watch(this, "y", "push" + __I__++ +".y");
 		}
 		override public function destroy():void {
 			super.destroy();

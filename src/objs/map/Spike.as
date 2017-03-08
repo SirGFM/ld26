@@ -15,6 +15,7 @@ package objs.map {
 			loadGraphic(gfx, true, false, 16, 16);
 			immovable = true;
 			moves = false;
+			active = false;
 		}
 	}
 }

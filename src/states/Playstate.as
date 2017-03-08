@@ -17,6 +17,7 @@ package states {
 	import org.flixel.FlxU;
 	import plugins.Menu;
 	import plugins.Reset;
+	import plugins.StateWatcher;
 	import plugins.Twitter;
 	import plugins.Window;
 	import utils.Maps;
@@ -34,12 +35,14 @@ package states {
 		private static var self:Playstate;
 		
 		private var _pl:Player;
-		private var map:FlxTilemap;
+		protected var map:FlxTilemap;
 		
 		private var fading:Boolean;
 		private var sound:FlxSound;
 		
 		private var _emitter:FlxEmitter;
+		
+		private var window:Window;
 		
 		override public function create():void {
 			FlxG.worldBounds.make(0, 0, 512, 512);
@@ -47,12 +50,10 @@ package states {
 			_pl = new Player();
 			
 			map = new FlxTilemap();
+			map.active = false;
 			
-			add(_pl);
 			
 			fading = false;
-			Maps.retry(map);
-			
 			
 			var b:FlxBasic = FlxG.getPlugin(Twitter);
 			if (b)
@@ -67,6 +68,9 @@ package states {
 				FlxG.addPlugin(new Menu());
 			else
 				b.exists = true;
+			window = FlxG.getPlugin(Window) as Window;
+			if (!window)
+				window = FlxG.addPlugin(new Window()) as Window;
 			
 			Maps.playMusic();
 			
@@ -76,6 +80,12 @@ package states {
 			_emitter.makeParticles(gfx, 128, 360, false, 0);
 			_emitter.setRotation( -360, 360);
 			add(_emitter);
+			add(_pl);
+			Maps.retry(map);
+			
+			
+			if (!FlxG.getPlugin(StateWatcher))
+				FlxG.addPlugin(new StateWatcher());
 		}
 		override public function destroy():void {
 			super.destroy();
@@ -84,6 +94,7 @@ package states {
 			if (sound)
 				sound.destroy();
 			sound = null;
+			window.sleep();
 		}
 		
 		override public function update():void {
@@ -92,20 +103,22 @@ package states {
 			
 			if (!_pl.exists) {
 				Maps.retry(map);
+				map.preUpdate();
+				map.update();
+				map.postUpdate();
 			}
 			
 			super.update();
-			map.preUpdate();
-			map.update();
-			map.postUpdate();
 			
 			FlxG.overlap(this, null, onOverlap);
 			i = 0;
 			while (i < length) {
 				obj = members[i++] as FlxObject;
 				if (obj && obj != map && obj.exists && obj.moves)
-					map.overlapsWithCallback(obj, FlxObject.separate);
+					FlxObject.separate(map, obj);
 			}
+			
+			window.overlaps(player);
 		}
 		override public function draw():void {
 			map.draw();
@@ -139,37 +152,38 @@ package states {
 			// if it's working, don't touch it... don't even look at it!
 			var push:Pushable = getFromClass(o1, o2, Pushable) as Pushable;
 			if (push) {
-				var down:uint = FlxObject.DOWN
+				var down:uint = FlxObject.DOWN;
 				notSkip = false;
 				if (pl) {
 					if (!pl.canPush)
 						push.immovable = true;
 					FlxObject.separateX(pl, push);
 					push.immovable = true;
-					if (FlxObject.separateY(pl, push) && (pl.y < push.y))
-						pl.y = push.y - pl.height-0.1;
+					if (FlxObject.separateY(pl, push))
+						if (pl.y < push.y)
+							pl.y = FlxU.floor(push.y - pl.height);
+						else if (push.y < pl.y)
+							push.y = FlxU.floor(pl.y - push.height);
 					push.immovable = false;
 				}
 				else {
 					var t1:uint = o1.touching;
 					var t2:uint = o2.touching;
-					var i1:Boolean = o1.immovable;
-					var i2:Boolean = o2.immovable;
 					o1.touching = 0;
 					o2.touching = 0;
+					if (o1.x > o2.x) {
+						var switchTMP:FlxObject = o1;
+						o1 = o2;
+						o2 = switchTMP;
+					}
 					if (FlxObject.separate(o1, o2) && (o1.touching & down) == 0 && (o2.touching & down) == 0) {
 						o1.x = o1.last.x;
 						o2.x = o2.last.x;
 					}
-					else if (!i1 && !i2) {
-						if (o1.y < o2.y)
-							o2.immovable = true;
-						else
-							o1.immovable = true;
-						FlxObject.separateY(o1, o2);
-						o1.immovable = i1;
-						o2.immovable = i2;
-					}
+					if (o1.touching & down)
+						o1.y = FlxU.floor(o2.y - o1.height);
+					else if (o2.touching & down)
+						o2.y = FlxU.floor(o1.y - o2.height);
 					o1.touching |= t1;
 					o2.touching |= t2;
 				}

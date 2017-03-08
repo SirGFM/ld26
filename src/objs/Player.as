@@ -46,6 +46,7 @@ package objs {
 			addAnimation("stand", [0, 0, 0, 1, 0, 0, 0, 2, 3, 3, 2, 1, 0, 0], 8);
 			addAnimation("walk", [6, 7, 9, 8, 9, 7], 8);
 			addAnimation("push", [12, 13, 15, 14, 15, 13], 8);
+			addAnimation("onAir", [11], 0, false);
 			addAnimation("jump", [5, 11], 8, false);
 			addAnimation("death", [4, 10, 16], 8, false);
 			width = 15;
@@ -147,6 +148,8 @@ package objs {
 		protected function manageAnimation():void {
 			if (!alive && _curAnim.name != "death")
 				play("death");
+			else if (!(touching & DOWN) && _curAnim.name != "jump")
+				play("onAir");
 			else if (canPush && (touching & WALL) != 0)
 				play("push");
 			else if (touching & DOWN)

@@ -55,6 +55,7 @@ package objs.map {
 			allowCollisions = ANY;
 			
 			alpha = 1;
+			active = false;
 		}
 		
 		public function deactivate():void {
@@ -69,6 +70,7 @@ package objs.map {
 				sound = FlxG.loadSound(sfx, 1.0, false, false, true);
 			else
 				sound.play(true);
+			active = true;
 		}
 	}
 }

@@ -2,6 +2,7 @@ package plugins {
 	
 	import org.flixel.FlxG;
 	import org.flixel.FlxGroup;
+	import org.flixel.FlxObject;
 	import org.flixel.FlxSprite;
 	import org.flixel.FlxText;
 	
@@ -12,6 +13,8 @@ package plugins {
 	public class Window extends FlxGroup {
 		
 		[Embed(source = "../../assets/gfx/gui/window.png")]		private var gfx:Class;
+		
+		private var spr:FlxSprite;
 		
 		private var buffer:String;
 		private var text:FlxText;
@@ -26,7 +29,9 @@ package plugins {
 			msgArr = new Array();
 			i = -1;
 			
-			add(new FlxSprite(0, 0, gfx));
+			spr = new FlxSprite(0, 0, gfx);
+			spr.alpha = 0.75;
+			add(spr);
 			add(text);
 			sleep();
 		}
@@ -34,8 +39,10 @@ package plugins {
 		override public function update():void {
 			super.update();
 			if (FlxG.keys.justPressed("SPACE")) {
-				if (i >= 0)
+				if (i >= 0) {
+					text.text = buffer;
 					i = -1;
+				}
 				else
 					sleepCounter = 0;
 			}
@@ -71,8 +78,29 @@ package plugins {
 			sleepCounter = NaN;
 		}
 		public function sleep():void {
+			while (msgArr.length > 0)
+				msgArr.pop();
+			i = -1;
 			sleepCounter = NaN;
 			exists = false;
+		}
+		
+		public function switchY():void {
+			var y:Number;
+			if (spr.y == 0)
+				y = FlxG.height - spr.height;
+			else
+				y = 0;
+			spr.y = y;
+			text.y = y + 16;
+		}
+		public function overlaps(obj:FlxObject):void {
+			if (obj.overlaps(spr))
+				switchY();
+			else if (spr.y != 0) {
+				switchY();
+				overlaps(obj);
+			}
 		}
 	}
 }

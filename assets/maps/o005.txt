@@ -1,9 +1,10 @@
-msg,Becareful how you push those crates...You aren't strong enough to push more than one at the same time.,If you ever need to jump without the ability;that spring may be of help.
+msg,Becareful how you push those crates...You aren't strong enough to push more than one at the same time.
 objs.Player,1,8
 objs.panels.PushPanel,3,8
 objs.map.Pushable,11,10
 objs.map.Pushable,5,14
-objs.map.Pushable,9,14
+objs.map.Pushable,8,14
 objs.map.Spring,2,18
-objs.map.Goal,28,18
-objs.map.Spring,7,19
+objs.map.Spring,8,19
+objs.map.Goal,28,20
+objs.map.Spring,12,21
