@@ -1,0 +1,20 @@
+msg,You survived the fall and was able to get through the room...What about your reflex?Do you think you can pass through this fragile sand?
+objs.Player,2,22
+objs.map.Goal,29,22
+objs.map.Sand,8,23
+objs.map.Sand,9,23
+objs.map.Sand,10,23
+objs.map.Sand,11,23
+objs.map.Sand,12,23
+objs.map.Sand,13,23
+objs.map.Sand,14,23
+objs.map.Sand,15,23
+objs.map.Sand,16,23
+objs.map.Sand,17,23
+objs.map.Sand,18,23
+objs.map.Sand,19,23
+objs.map.Sand,20,23
+objs.map.Sand,21,23
+objs.map.Sand,22,23
+objs.map.Sand,23,23
+objs.map.Sand,24,23

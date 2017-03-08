@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flex-config>
+	<compiler>
+		<define append="true">
+			<name>CFG::debug</name>
+			<value>false</value>
+		</define>
+		<define append="true">
+			<name>CFG::release</name>
+			<value>!CFG::debug</value>
+		</define>
+	</compiler>
+</flex-config>

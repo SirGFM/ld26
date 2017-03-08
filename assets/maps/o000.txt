@@ -1,0 +1,3 @@
+msg,You are finally awake!You probably need a checkup after all this time...Start moving toward that door. (move with arrow keys)
+objs.Player,3,9
+objs.map.Goal,29,19

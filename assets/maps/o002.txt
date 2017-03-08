@@ -1,0 +1,4 @@
+msg,Great! Things are going as expected...Let's try something different this time.Pass through that pod to get a ability.,This is a "Jump Pod".After passing though it you'll be able to jump! (press x to jump)
+objs.map.Goal,30,17
+objs.Player,2,24
+objs.panels.JumpPanel,5,24

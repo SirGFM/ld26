@@ -1,0 +1,6 @@
+objs.map.Goal,1,8
+objs.map.Sand,2,9
+objs.map.Sand,3,9
+objs.map.Sand,4,9
+objs.Player,2,14
+objs.panels.JumpPanel,6,14

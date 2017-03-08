@@ -1,0 +1,4 @@
+*.xcf
+game.lxml
+*.wav
+obj/compoVersionConfig.old

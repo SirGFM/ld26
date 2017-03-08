@@ -1,0 +1,36 @@
+msg,That was easy... there was no challenge.How about now?
+objs.Player,2,7
+objs.map.Goal,29,8
+objs.panels.JumpPanel,5,17
+objs.map.Sand,0,18
+objs.map.Sand,1,18
+objs.map.Sand,2,18
+objs.map.Sand,3,18
+objs.map.Sand,4,18
+objs.map.Sand,5,18
+objs.map.Sand,6,18
+objs.map.Sand,7,18
+objs.map.Sand,8,18
+objs.map.Sand,9,18
+objs.map.Sand,10,18
+objs.map.Sand,11,18
+objs.map.Sand,12,18
+objs.map.Sand,13,18
+objs.map.Sand,14,18
+objs.map.Sand,15,18
+objs.map.Sand,16,18
+objs.map.Sand,17,18
+objs.map.Sand,18,18
+objs.map.Sand,19,18
+objs.map.Sand,20,18
+objs.map.Sand,21,18
+objs.map.Sand,22,18
+objs.map.Sand,23,18
+objs.map.Sand,24,18
+objs.map.Sand,25,18
+objs.map.Sand,26,18
+objs.map.Sand,27,18
+objs.map.Sand,28,18
+objs.map.Sand,29,18
+objs.map.Sand,30,18
+objs.map.Sand,31,18

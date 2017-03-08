@@ -1,0 +1,5 @@
+msg,It seems you have no problems with jumping. Let's move to something different., Those are "Push Pad"s. They grant you the ability of pushing crates.Just move toward a crate and you'll see.,If you ever find yourself unable to continue, press 'r' and I'll bring you back to the beggining of the room.Also, whenever you get tired of these tests, press 'q'.
+objs.Player,1,20
+objs.panels.PushPanel,9,21
+objs.map.Pushable,12,21
+objs.map.Goal,29,25
